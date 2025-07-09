@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  tello_ros:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    container_name: meu_drone_ros
+    command: sleep infinity
+
+    # AQUI ESTÁ A LÓGICA DE MONTAGEM CORRETA
+    volumes:
+      # Monta a pasta do projeto atual ('.') para dentro do contêiner em /home/vscode/ros2_ws
+      # ':cached' é uma otimização de performance para Windows/macOS
+      - .:/home/vscode/ros2_ws:cached
+
+    # Define o diretório de trabalho padrão dentro do contêiner
+    working_dir: /home/vscode/ros2_ws
+
+    # Configurações de rede e GUI
+    network_mode: "host"
+    environment:
+      - DISPLAY=${DISPLAY}
+    # Monta o volume para a interface gráfica (VcXsrv)
+    # A linha abaixo é para Linux. Se você estiver no Windows, a linha de cima já é suficiente.
+    # - /tmp/.X11-unix:/tmp/.X11-unix
