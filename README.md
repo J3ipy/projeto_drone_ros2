@@ -62,8 +62,6 @@ A forma mais simples de executar este projeto é através do ambiente de desenvo
     * Clique em **"Reopen in Container"**.
     * Aguarde enquanto o VS Code constrói a imagem Docker e configura o ambiente de desenvolvimento. Este processo pode demorar alguns minutos na primeira vez.
 
-    ![Reopen in Container](https://user-images.githubusercontent.com/12743534/111929910-2f360700-8a7c-11eb-986b-8c4f008a7359.png)
-
 4.  **Pronto!** O seu ambiente está 100% configurado. O terminal integrado do VS Code já está dentro do contêiner e com o ambiente ROS 2 ativado.
 
 ---
@@ -90,10 +88,4 @@ O coração do projeto está dividido em três nós ROS 2 principais:
 * `drone_node.py`: Funciona como o driver do drone. É responsável por enviar comandos (decolar, aterrar, mover), receber telemetria e publicar o feed de vídeo da câmara num tópico.
 * `vision_node.py`: Subscreve ao tópico de vídeo, processa cada frame para detetar e decodificar códigos QR, e publica os dados do QR encontrado num novo tópico.
 * `mission_controller_node.py`: O cérebro da operação. Subscreve aos dados do QR code, gere a máquina de estados da missão (procurar, navegar, etc.) e invoca os serviços do `drone_node` para executar as ações definidas no `mission.json`.
-
----
-
-## 📄 Licença
-
-Este projeto está licenciado sob a Licença Apache 2.0. Veja o ficheiro `LICENSE` para mais detalhes.
 
