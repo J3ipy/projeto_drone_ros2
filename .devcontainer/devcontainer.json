@@ -1,30 +1,31 @@
 {
     "name": "Tello ROS Workspace",
-
-    // Aponta para o seu docker-compose.yaml
     "dockerComposeFile": "../docker-compose.yaml",
-
-    // Especifica qual serviço do compose usar para o dev container
     "service": "tello_ros",
-
-    // ADICIONE ESTA PROPRIEDADE DE VOLTA
-    // Diz ao VS Code onde abrir a pasta do projeto dentro do contêiner.
-    // O valor deve ser o mesmo que o destino do volume no docker-compose.yaml.
     "workspaceFolder": "/home/vscode/ros2_ws",
 
-    // Extensões e outras configurações
     "customizations": {
       "vscode": {
         "extensions": [
           "ms-vscode.cpptools",
           "ms-python.python",
           "ms-iot.vscode-ros"
-        ]
+        ],
+        // --- ADICIONE ESTE BLOCO DE CONFIGURAÇÃO ---
+        "settings": {
+          "terminal.integrated.defaultProfile.linux": "bash",
+          "terminal.integrated.profiles.linux": {
+            "bash": {
+              "path": "/bin/bash",
+              // Isto força o terminal a ser interativo, o que carrega o .bashrc
+              "args": [ "-i" ]
+            }
+          }
+        }
+        // --- FIM DO BLOCO DE CONFIGURAÇÃO ---
       }
     },
     
-    // Comando a ser executado após a criação do contêiner
     "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/ros2_ws && . /opt/ros/humble/setup.sh && colcon build",
-
     "remoteUser": "vscode"
 }

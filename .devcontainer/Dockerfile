@@ -31,8 +31,8 @@ RUN groupadd --gid $USER_GID $USERNAME \
 # --- CONFIGURAÇÃO GLOBAL DO AMBIENTE ROS ---
 # Adiciona os scripts de ativação aos perfis globais do shell.
 # Isto garante que qualquer shell (sh, bash, interativo ou não) carregue o ambiente.
-RUN echo "source /opt/ros/humble/setup.sh" >> /etc/bash.bashrc && \
-    echo "source /home/${USERNAME}/ros2_ws/install/setup.sh" >> /etc/bash.bashrc
+RUN echo "source /opt/ros/humble/setup.bash" >> /home/vscode/.bashrc && \
+    echo "if [ -f /home/vscode/ros2_ws/install/setup.bash ]; then source /home/vscode/ros2_ws/install/setup.bash; fi" >> /home/vscode/.bashrc
 
 # Define a variável de ambiente BASH_ENV para forçar o carregamento em shells não interativos
 ENV BASH_ENV /etc/bash.bashrc
